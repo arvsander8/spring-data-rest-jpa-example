@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/users")
 public class UsersController {
@@ -43,7 +45,7 @@ public class UsersController {
 	 * @return the {@link User} created
 	 */
     @PostMapping(value = "/load")
-    public User load(@RequestBody final User users) {
+    public User load(@Valid @RequestBody final User users) {
         userJpaRespository.save(users);
         return userJpaRespository.findByName(users.getName());
     }

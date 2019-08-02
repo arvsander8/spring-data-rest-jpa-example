@@ -31,6 +31,7 @@ import com.techprimers.repository.UserJpaRespository;
 @WebMvcTest(UsersController.class)
 public class SpringBootDemoApplicationTests {
 	private User user;
+	//private User user2;
 	
 	@Autowired
 	private MockMvc mockMvc;
@@ -46,6 +47,13 @@ public class SpringBootDemoApplicationTests {
 		user.setName("Virat");
 		user.setTeamName("RCB");
 		user.setSalary(15000);
+		
+		/*user2 = new User();
+		user2.setId(2l);
+		//user2.setName("");
+		user2.setTeamName("RCB");
+		user2.setSalary(15000);*/
+		
 	}
 
 	@Test
@@ -60,7 +68,20 @@ public class SpringBootDemoApplicationTests {
 
 		JSONAssert.assertEquals(responseUser, result.getResponse().getContentAsString(), false);
 	}
+	
+	/*@Test
+	public void userCreationTest2() throws Exception {
+		when(userJpaRespository.findByName(user2.getName())).thenReturn(user2);
+		ObjectMapper mapper = new ObjectMapper();
+		String transactionString = mapper.writeValueAsString(user2);
 
+		MvcResult result = mockMvc.perform(post("/users/load").content(transactionString).contentType(MediaType.APPLICATION_JSON))
+								  .andExpect(status().isOk()).andReturn();
+		String responseUser = result.getResponse().getContentAsString();
+
+		JSONAssert.assertEquals(responseUser, result.getResponse().getContentAsString(), false);
+	}
+*/
 	@Test
 	public void findAllUsersTest() throws Exception {
 		List<User> users = new ArrayList<>();

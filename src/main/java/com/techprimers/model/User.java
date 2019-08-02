@@ -4,10 +4,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 public class User {
 
     private Long id;
+    @NotBlank(message = "Name is mandatory")
     private String name;
     private String teamName;
     private Integer salary;
